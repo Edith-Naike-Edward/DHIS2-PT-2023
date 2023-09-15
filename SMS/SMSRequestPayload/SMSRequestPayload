@@ -1,1 +1,91 @@
+package com.iCareapi.sms;
+
+public class SMSRequestPayload {
+
+    private String patientPhoneNo;
+
+    private String providerPhoneNo;
+
+    private String userPhoneNo;
+
+    private String criteria;
+
+    private String status;
+
+    private String message;
+
+    public SMSRequestPayload(){
+
+    }
+
+    public SMSRequestPayload(String patientPhoneNo, String providerPhoneNo, String userPhoneNo, String criteria, String status, String message) {
+        this.patientPhoneNo = patientPhoneNo;
+        this.providerPhoneNo = providerPhoneNo;
+        this.userPhoneNo = userPhoneNo;
+        this.criteria = criteria;
+        this.status = status;
+        this.message = message;
+    }
+
+    public String getPatientPhoneNo() {
+        return patientPhoneNo;
+    }
+
+    public void setPatientPhoneNo(String patientPhoneNo) {
+        this.patientPhoneNo = patientPhoneNo;
+    }
+
+    public String getProviderPhoneNo() {
+        return providerPhoneNo;
+    }
+
+    public void setProviderPhoneNo(String providerPhoneNo) {
+        this.providerPhoneNo = providerPhoneNo;
+    }
+
+    public String getUserPhoneNo() {
+        return userPhoneNo;
+    }
+
+    public void setUserPhoneNo(String userPhoneNo) {
+        this.userPhoneNo = userPhoneNo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String toString(){
+        return "SMSRequestPayload{" +
+                ", patientPhoneNo='" + patientPhoneNo + '\'' +
+                ", providerPhoneNo='" + providerPhoneNo + '\'' +
+                ", userPhoneNo=" + userPhoneNo +  '\'' +
+                ", criteria=" + criteria + '\'' +
+                ", status=" + status + '\'' +
+                ", message=" + message + '\'' +
+                '}';
+
+    }
+
+    public String getCriteria() {
+        return criteria;
+    }
+
+    public void setCriteria(String criteria) {
+        this.criteria = criteria;
+    }
+}
 
