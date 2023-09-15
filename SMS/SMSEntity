@@ -1,0 +1,113 @@
+package com.iCareapi.sms;
+
+import jakarta.persistence.*;
+
+//import javax.persistence.*;
+
+@Entity
+@Table(name = "smsentity")
+public class SMSEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String patientPhoneNo;
+    private String providerPhoneNo;
+    private String userPhoneNo;
+
+    private String criteria;
+    private String status;
+    private String message;
+
+    public SMSEntity() {
+    }
+
+    public SMSEntity(Long id, String patientPhoneNo, String providerPhoneNo,
+                     String userPhoneNo, String criteria, String status, String message) {
+        this.id = id;
+        this.patientPhoneNo = patientPhoneNo;
+        this.providerPhoneNo = providerPhoneNo;
+        this.userPhoneNo = userPhoneNo;
+        this.criteria = criteria;
+        this.status = status;
+        this.message = message;
+    }
+
+    public SMSEntity(String patientPhoneNo, String providerPhoneNo, String userPhoneNo, String criteria, String status, String message) {
+        this.patientPhoneNo = patientPhoneNo;
+        this.providerPhoneNo = providerPhoneNo;
+        this.userPhoneNo = userPhoneNo;
+        this.criteria = criteria;
+        this.status = status;
+        this.message = message;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPatientPhoneNo() {
+        return patientPhoneNo;
+    }
+
+    public void setPatientPhoneNo(String patientPhoneNo) {
+        this.patientPhoneNo = patientPhoneNo;
+    }
+
+    public String getProviderPhoneNo() {
+        return providerPhoneNo;
+    }
+
+    public void setProviderPhoneNo(String providerPhoneNo) {
+        this.providerPhoneNo = providerPhoneNo;
+    }
+
+    public String getUserPhoneNo() {
+        return userPhoneNo;
+    }
+
+    public void setUserPhoneNo(String userPhoneNo) {
+        this.userPhoneNo = userPhoneNo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getCriteria() {
+        return criteria;
+    }
+
+    public void setCriteria(String criteria) {
+        this.criteria = criteria;
+    }
+
+//    @Override
+//    public String toString() {
+//        return "SMSEntity{" +
+//                "id=" + id +
+//                ", patientPhoneNo='" + patientPhoneNo + '\'' +
+//                ", providerPhoneNo='" + providerPhoneNo + '\'' +
+//                ", userPhoneNo='" + userPhoneNo + '\'' +
+//                ", status='" + status + '\'' +
+//                ", message='" + message + '\'' +
+//                '}';
+//    }
+
+}
