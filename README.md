@@ -1,2 +1,10 @@
 # DHIS2-PT-2023
-This repository contains Practical Training files that were done in 2023
+This repository contains Practical Training files that were done in 2023.
+
+iCare OUTBOUND SMS API NAVIGATION STEPS:
+1. Head to branch: iCare-webUI-smsapi.
+2. Clone the repository/directory titled 'SMS'.
+3. Review and understand the code.
+4. Test using Postman.
+
+NOTE: I AM USING MYSQL WORKBENCH AND INTELLIJ IDEA COMMMUNITY EDITION 2023.2 - MODIFY ACCORDING TO YOUR NEEDS/USAGE.
