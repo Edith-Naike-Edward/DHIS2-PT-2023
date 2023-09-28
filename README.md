@@ -4,7 +4,8 @@ This repository contains Practical Training files that were done in 2023.
 iCare OUTBOUND SMS API NAVIGATION STEPS:
 1. Head to branch: iCare-webUI-smsapi.
 2. Clone the repository/directory titled 'SMS'.
-3. Review and understand the code.
+3. Read descriptions of each file, and view and understand the code.
 4. Test using Postman.
 
-NOTE: I AM USED MYSQL WORKBENCH, Spring BOOT PROJECT AND INTELLIJ IDEA COMMUNITY EDITION 2023.2 - MODIFY ACCORDING TO YOUR NEEDS/USAGE.
+I USED MYSQL WORKBENCH, Spring BOOT PROJECT AND INTELLIJ IDEA COMMUNITY EDITION 2023.2 - MODIFY ACCORDING TO YOUR NEEDS/USAGE.
+
