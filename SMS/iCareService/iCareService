@@ -1,0 +1,97 @@
+package com.iCareapi.sms;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Map;
+
+@Service
+public class iCareService{
+
+    // METHODS FOR SEND_STATUS 'TO THE SERVER' ACTIONS AND RESPONSE IN JSON FORMAT
+
+    public String errorResponse(String errorMessage) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = getErrorResponse(errorMessage);
+
+        jsonObject.put("Error",jsonArray);
+
+        return jsonObject.toString();
+    }
+    private static JSONArray getErrorResponse(String error_message) throws JSONException {
+        JSONArray reasonForError = new JSONArray();
+        JSONObject reason_for_error = new JSONObject();
+
+        reason_for_error.put("Error message", error_message);
+        reasonForError.put(reason_for_error);
+        return reasonForError;
+    }
+
+
+    public String sentResponse(String ID,String status_message) throws JSONException {
+        JSONObject sentResponse = new JSONObject();
+        JSONArray response = getSentResponse(ID,status_message);
+
+        sentResponse.put("Event",response);
+
+        return sentResponse.toString();
+    }
+
+    private JSONArray getSentResponse(String id, String statusMessage) throws JSONException {
+        JSONArray event = new JSONArray();
+        JSONObject status_event = new JSONObject();
+
+        JSONArray statusArray = new JSONArray();
+        JSONObject statusObject = new JSONObject();
+
+        statusObject.put("id",id);
+        statusObject.put("status",statusMessage);
+        statusArray.put(statusObject);
+
+        status_event.put("message",statusArray);
+        event.put(status_event);
+        return event;
+    }
+
+    public String queuedResponse(String server_ID,String Status) throws JSONException {
+        JSONArray queuedArray = new JSONArray();
+        JSONObject queuedObject = new JSONObject();
+
+        JSONArray eventQueued = new JSONArray();
+        JSONObject objectQueued = new JSONObject();
+        objectQueued.put("server_id",server_ID);
+        objectQueued.put("Status", Status);
+        eventQueued.put(objectQueued);
+
+        queuedObject.put("event",eventQueued);
+        queuedArray.put(queuedObject);
+        return queuedArray.toString();
+    }
+
+    public String getParameterValue(Map<String, String[]> params, String paramName) {
+        String[] values = params.get(paramName);
+        return values != null && values.length > 0 ? values[0]:null;
+    }
+
+
+//    private final RecipientRepository recipientRepository;
+    private final SMSEntityRepository smsEntityRepository;
+
+    @Autowired
+    public iCareService(SMSEntityRepository smsEntityRepository) {
+        this.smsEntityRepository = smsEntityRepository;
+    }
+
+    public void processSMSRequest(SMSRequestPayload requestPayload) {
+        SMSEntity sms = new SMSEntity();
+        sms.setPatientPhoneNo(requestPayload.getPatientPhoneNo());
+        sms.setProviderPhoneNo(requestPayload.getProviderPhoneNo());
+        sms.setUserPhoneNo(requestPayload.getUserPhoneNo());
+        sms.setStatus(requestPayload.getStatus());
+        sms.setMessage(requestPayload.getMessage());
+        smsEntityRepository.save(sms);
+    }
+}
