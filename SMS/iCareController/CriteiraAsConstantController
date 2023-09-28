@@ -1,0 +1,97 @@
+package com.iCareapi.sms;
+
+import jakarta.servlet.http.HttpServletRequest;
+import org.json.JSONException;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.Arrays;
+import java.util.List;
+
+import java.lang.reflect.Field;
+import java.util.Map;
+
+import static com.iCareapi.sms.iCareConfig.*;
+
+@RestController
+@RequestMapping(path = "/outgoing")
+public class iCareController {
+    private final iCareService icareService;
+
+    public iCareController(iCareService icareService) {
+        this.icareService = icareService;
+    }
+
+    @CrossOrigin()
+    @PostMapping(value = "/send", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> handleRequest(HttpServletRequest request,
+                                                @RequestParam(name = "action") String action,
+                                                @RequestParam(name = "patientPhoneNo", required = false) String patientPhoneNo,
+                                                @RequestParam(name = "providerPhoneNo", required = false) String providerPhoneNo,
+                                                @RequestParam(name = "userPhoneNo", required = false) String userPhoneNo,
+                                                @RequestParam(name = "criteria", required = false) String criteria,
+                                                @RequestParam(name = "status", required = false) String status,
+                                                @RequestParam(name = "message", required = false) String message
+//    ) throws JSONException {
+//        if (iCareConfig.ACTION_OUTGOING.equals(action) && iCareConfig.CR){
+//            SMSRequestPayload payload = new SMSRequestPayload();
+//            payload.setPatientPhoneNo(patientPhoneNo);
+//            payload.setProviderPhoneNo(providerPhoneNo);
+//            payload.setUserPhoneNo(userPhoneNo);
+//            payload.setStatus(status);
+//            payload.setMessage(message);
+//            icareService.processSMSRequest(payload);
+//        }
+//        return new ResponseEntity<>("SMS sent successfully.",HttpStatus.OK);
+// }
+//
+
+    ) throws JSONException {
+        if (iCareConfig.ACTION_OUTGOING.equals(action)) {
+            SMSRequestPayload payload = new SMSRequestPayload();
+            payload.setPatientPhoneNo(patientPhoneNo);
+            payload.setProviderPhoneNo(providerPhoneNo);
+            payload.setUserPhoneNo(userPhoneNo);
+            payload.setCriteria(criteria);
+            payload.setStatus(status);
+            payload.setMessage(message);
+
+            // Check if the criteria matches any of the phone numbers
+            String result = checkCriteria(criteria, payload);
+
+            icareService.processSMSRequest(payload);
+
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("Invalid action.", HttpStatus.BAD_REQUEST);
+    }
+
+    private String checkCriteria(String criteria, SMSRequestPayload payload) {
+            switch (criteria) {
+                case HEALTH_ALERT:
+                    // Handle HEALTH_ALERT criteria
+                    return "Sending health alert SMS.";
+                case INSURANCE:
+                    // Handle INSURANCE criteria
+                    return "Sending insurance-related SMS.";
+                case AGE:
+                    // Handle AGE criteria
+                    return "Sending age-related SMS.";
+                case PREGNANT:
+                    // Handle PREGNANT criteria
+                    return "Sending pregnancy-related SMS.";
+                case FEMALE:
+                    // Handle FEMALE criteria
+                    return "Sending SMS to females.";
+                case MALE:
+                    // Handle MALE criteria
+                    return "Sending SMS to males.";
+                default:
+                    return "Invalid criteria.";
+            }
+        }
+
+}
